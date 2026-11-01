@@ -2565,4 +2565,31 @@ details.br > summary .ttl { justify-self: start; }
 </style>
 <script>(function(){function s(){var v=document.getElementById('vstats');if(v)v.hidden=location.hash!=='#wzc-stats';}s();window.addEventListener('hashchange',s);})();</script>
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?8cc29e6a3864e6bde2a52a34e14c07fd";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+/* 事件记录：HR 点开了哪个分支、有没有开始试玩、从作品菜单 / 目录跳到了哪里 */
+document.addEventListener('click', function (e) {
+  try {
+    var t = e.target, sum = t.closest('summary'), a = t.closest('a[href^="#"]');
+    if (sum && sum.parentElement.matches('details.br') && !sum.parentElement.open) {
+      var d = sum.parentElement, ttl = sum.querySelector('.ttl');
+      _hmt.push(['_trackEvent', '分支', '展开', d.id + ' ' + (ttl ? ttl.textContent.trim().slice(0, 30) : '')]);
+    } else if (sum && sum.parentElement.matches('details.fold-body') && !sum.parentElement.open) {
+      _hmt.push(['_trackEvent', '选读', '展开', sum.closest('.fold').id]);
+    } else if (sum && sum.parentElement.matches('#devlog') && !sum.parentElement.open) {
+      _hmt.push(['_trackEvent', '开发日志', '展开', 'devlog']);
+    }
+    if (t.closest('#play-start')) _hmt.push(['_trackEvent', '游戏', '开始试玩', '聚光灯']);
+    if (a && a.closest('#mega')) _hmt.push(['_trackEvent', '作品菜单', '跳转', a.getAttribute('href')]);
+    else if (a && a.closest('.card')) _hmt.push(['_trackEvent', '目录', '点击', a.getAttribute('href')]);
+    else if (a && a.closest('.bd-tab')) _hmt.push(['_trackEvent', '拆解跳转条', '点击', a.getAttribute('href')]);
+  } catch (err) {}
+}, true);
+</script>
 </body></html>
